@@ -10,7 +10,7 @@ function Signin() {
         firebase.auth().createUserWithEmailAndPassword(mail, password).then(
             (userCredential) => {
                 var user = userCredential.user;
-                navigate('/')
+                navigate('/chatroom')
                 alert("success", "Sign up success!");
             }).catch((error) => {
                 alert(error.message);

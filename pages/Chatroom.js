@@ -3,9 +3,9 @@ import { Link } from'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import { useNavigate } from "react-router-dom";
 import React from 'react';
-import firebase from './utils/config';
+import firebase from '../utils/config';
 
-function Header() {
+function Chatroom() {
 
     const [user, setUser] = React.useState(null);
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Header() {
 
     function signout(){
         firebase.auth().signOut();
-        navigate('/signin');
+        navigate('/');
     }
 
     return <Menu>
@@ -43,4 +43,4 @@ function Header() {
     </Menu>;
 }
 
-export default Header;
+export default Chatroom;
