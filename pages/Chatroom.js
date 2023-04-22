@@ -23,9 +23,6 @@ function Chatroom() {
 
     return <Menu>
         <Menu.Item as={Link} to="/">Chatroom</Menu.Item>
-        <MenuItem>
-            <Search/>
-        </MenuItem>
         <Menu.Menu position='right'>
             {
                 user === null ? (
