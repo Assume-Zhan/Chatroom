@@ -1,10 +1,10 @@
 import 'semantic-ui-css/semantic.min.css';
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Input } from 'semantic-ui-react'
 
 function Group(props){
-    return <div>
-        <Button animated='vertical'>
+    return <div style={{backgroundColor: "red", margin: 5}}>
+        <Button animated='vertical' style={{height: "55%", width: "55%", }}>
             <Button.Content hidden>{props.name}</Button.Content>
             <Button.Content visible>
                 <Icon name='shop' />
@@ -15,13 +15,17 @@ function Group(props){
 
 function Messager(props){
 
-    var group = props.group == null ? [] : props.group;
+    // var group = props.group == null ? [] : props.group;
+    var group = ["Name1", "Name2", "Name3"];
 
-    return group.map((name) => (
-        <Group
-            name={name}
-        />
-    ))
+    return <>
+        <Input type="text" icon="users" placeholder="Add..." onChange={() => {props.handleAddGroup()}}/>
+        {group.map((name) => (
+                <Group
+                    name={name}
+                />
+        ))}
+    </>
     
 }
 

@@ -45,17 +45,17 @@ function Chatroom() {
                 }
             </Menu.Menu>
         </Menu>
-        <Container textAlign='left' style={{backgroundColor: "red"}}>
-            {/* Messager */}
-            <Messager/>
-        </Container>
-        <Container textAlign='left' style={{backgroundColor: "blue"}}>
+        <div style={{display: "flex"}}>
+            <div style={{display: "block", width: "20%", height: "100%", textAlign: "center", backgroundColor: "blue"}}>
+                {/* Messager */}
+                <Messager textAlign='center'/>
+            </div>
             {/* Messages */}
             {/* Input Message */}
-            <UserInput
+            <UserInput textAlign='right'
                 handleMessageChange={handleMessageChange}
             />
-        </Container>
+        </div>
     </>;
 }
 
