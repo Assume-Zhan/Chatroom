@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import React from 'react';
 import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
+import Messager from './chatroom_item/Messager';
 
 function Chatroom() {
 
@@ -44,11 +45,17 @@ function Chatroom() {
                 }
             </Menu.Menu>
         </Menu>
-        {/* Messages */}
-        {/* Input Message */}
-        <UserInput
-            handleMessageChange={handleMessageChange}
-        />
+        <Container textAlign='left' style={{backgroundColor: "red"}}>
+            {/* Messager */}
+            <Messager/>
+        </Container>
+        <Container textAlign='left' style={{backgroundColor: "blue"}}>
+            {/* Messages */}
+            {/* Input Message */}
+            <UserInput
+                handleMessageChange={handleMessageChange}
+            />
+        </Container>
     </>;
 }
 
