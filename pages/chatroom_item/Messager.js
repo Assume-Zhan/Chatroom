@@ -19,7 +19,13 @@ function Messager(props){
     var group = ["Name1", "Name2", "Name3"];
 
     return <>
-        <Input type="text" icon="users" placeholder="Add..." onChange={() => {props.handleAddGroup()}}/>
+        <Input 
+            type="text" 
+            icon="users" 
+            placeholder="Add..." 
+            style={{width: "100%"}} 
+            onChange={() => {props.handleAddGroup()}}
+        />
         {group.map((name) => (
                 <Group
                     name={name}
