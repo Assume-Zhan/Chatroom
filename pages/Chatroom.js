@@ -1,12 +1,13 @@
-import { Menu, MenuItem, Container } from 'semantic-ui-react';
+import { Menu, Divider } from 'semantic-ui-react';
 import { Link } from'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
+import 'firebase/compat/database'
 import { useNavigate } from "react-router-dom";
 import React from 'react';
 import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
-import 'firebase/compat/database'
+import Messages from './chatroom_item/Messages';
 
 function Chatroom() {
 
@@ -65,11 +66,15 @@ function Chatroom() {
                 {/* Messager */}
                 <Messager textAlign='center'/>
             </div>
-            {/* Messages */}
-            {/* Input Message */}
-            <UserInput textAlign='right'
-                sendMessage={sendMessage}
-            />
+            <div style={{display: "block", height: "100%", textAlign: "center", backgroundColor: "yellow"}}>
+                {/* Messages */}
+                <Messages
+                />
+                {/* Input Message */}
+                <UserInput textAlign='right'
+                    sendMessage={sendMessage}
+                />
+            </div>
         </div>
     </>;
 }
