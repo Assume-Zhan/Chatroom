@@ -6,6 +6,7 @@ import React from 'react';
 import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
+import 'firebase/compat/database'
 
 function Chatroom() {
 
@@ -23,8 +24,22 @@ function Chatroom() {
         navigate('/');
     }
 
-    function handleMessageChange(){
+    function sendMessage(message){
+        var com_list = firebase.database().ref('com_list');
 
+        var post_data = {
+            data: message,
+            email: user.email
+        };
+
+        com_list.push({data: post_data.data, email: post_data.email}).key;
+
+        com_list.on(
+            'value',
+            function(snapshot) {
+                console.log(snapshot.val());
+            }
+        )
     }
 
     return <>
@@ -53,7 +68,7 @@ function Chatroom() {
             {/* Messages */}
             {/* Input Message */}
             <UserInput textAlign='right'
-                handleMessageChange={handleMessageChange}
+                sendMessage={sendMessage}
             />
         </div>
     </>;
