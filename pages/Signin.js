@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Form, Container } from "semantic-ui-react";
+import { Form, Container } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import firebase from "../utils/config";
 import "firebase/compat/auth";
@@ -24,8 +24,19 @@ function Signin() {
 
     return <Container>
         <Form onSubmit={SubmitForm}>
-            <Form.Input label="Mail" value={mail} onChange={(e) => {setMail(e.target.value)}} placeholder="Input your mail"></Form.Input>
-            <Form.Input label="Password" value={password} type="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="Input your password"></Form.Input>
+            <Form.Input 
+                label="Mail" 
+                value={mail} 
+                onChange={(e) => {setMail(e.target.value)}} 
+                placeholder="Input your mail"
+            />
+            <Form.Input 
+                label="Password" 
+                value={password} 
+                type="password" 
+                onChange={(e) => {setPassword(e.target.value)}} 
+                placeholder="Input your password"
+            />
             <Form.Button>Sign in</Form.Button>
         </Form>
     </Container>

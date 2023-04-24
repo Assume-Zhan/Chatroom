@@ -7,7 +7,7 @@ function Homepage() {
 
     const [activeItem, setActiveItem] = React.useState("signin");
 
-    return <Container textAlign='center' >
+    return <Container textAlign='center' style={{width: "30%", height: "100%", margin: "200px"}}>
         <Menu widths="2">
             <Menu.Item active={activeItem === 'signin'} onClick={() => {setActiveItem("signin")}}>Signin</Menu.Item>
             <Menu.Item active={activeItem === 'login'} onClick={() => {setActiveItem("login")}}>Login</Menu.Item>

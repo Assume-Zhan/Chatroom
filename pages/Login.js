@@ -24,8 +24,19 @@ function Login() {
 
     return <Container>
         <Form onSubmit={SubmitForm}>
-            <Form.Input label="Mail" value={mail} onChange={(e) => {setMail(e.target.value)}} placeholder="Input your mail"></Form.Input>
-            <Form.Input label="Password" value={password} type="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="Input your password"></Form.Input>
+            <Form.Input 
+                label="Mail" 
+                value={mail} 
+                onChange={(e) => {setMail(e.target.value)}} 
+                placeholder="Input your mail"
+            />
+            <Form.Input 
+                label="Password" 
+                value={password} 
+                type="password" 
+                onChange={(e) => {setPassword(e.target.value)}} 
+                placeholder="Input your password"
+            />
             <Form.Button>Login</Form.Button>
         </Form>
     </Container>
