@@ -3,7 +3,7 @@ import { Link } from'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import 'firebase/compat/database'
 import { useNavigate } from "react-router-dom";
-import React from 'react';
+import React, { useEffect } from 'react';
 import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
@@ -13,6 +13,7 @@ function Chatroom() {
 
     const [user, setUser] = React.useState(null);
     const navigate = useNavigate();
+    const [messages, setMessages] = React.useState([]);
 
     React.useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -35,15 +36,42 @@ function Chatroom() {
 
         com_list.push({data: post_data.data, email: post_data.email}).key;
 
-        com_list.on(
-            'value',
-            function(snapshot) {
-                console.log(snapshot.val());
-            }
-        )
     }
 
-    return <>
+    useEffect(() => {
+        let m = []
+        var com_list = firebase.database().ref('/com_list');
+        const callback = snapshot => {
+            // var m = messages;
+            // m.push(snapshot.val());
+            // if(m != messages){
+            //     setMessages(m);
+            // }
+            snapshot.forEach(child => {
+                m.push(child.val())
+                console.log(child.val())
+                console.log(m.length)
+            })
+        }
+        com_list.once(
+            // 'child_added',
+            'value',
+            // function(snapshot) {
+            //     var m = messages;
+            //     m.push(snapshot.val());
+            //     if(m != messages){
+            //         setMessages(m);
+            //     }
+            //     console.log("Messages", messages); }
+            callback
+        ).then(() => {
+            setMessages(m)
+        })
+
+    }, [])
+
+
+    return (<>
         <Menu>
             <Menu.Item as={Link} to="/">Chatroom</Menu.Item>
             <Menu.Menu position='right'>
@@ -69,6 +97,7 @@ function Chatroom() {
             <div style={{display: "block", height: "100%", textAlign: "center", backgroundColor: "yellow"}}>
                 {/* Messages */}
                 <Messages
+                    messages={messages}
                 />
                 {/* Input Message */}
                 <UserInput textAlign='right'
@@ -76,7 +105,7 @@ function Chatroom() {
                 />
             </div>
         </div>
-    </>;
+    </>);
 }
 
 export default Chatroom;

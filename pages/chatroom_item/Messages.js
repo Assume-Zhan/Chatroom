@@ -1,5 +1,5 @@
 import 'semantic-ui-css/semantic.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Message } from 'semantic-ui-react'
 
 function Message_(props){
@@ -13,15 +13,26 @@ function Message_(props){
 function Messages(props){
     
     // var messages = [["Hello", 1], ["World", 2], ["!", 3]];
-    var messages = props.messages == null ? [] : props.messages;
+    const [messages, setMessages] = React.useState([]);
 
-    return <>
+    useEffect(() => {
+        console.log("In Messages useEffect", props.messages)
+        setMessages(props.messages)
+    }, [props.messages])
+
+    var idx = 0;
+    console.log("In messages", messages)
+
+    return (<div>
     {
-        messages == [] ? <></> : messages.map((message) => {
-            return <Message_ key={message[1]} message={message[0]}/>
+        // messages == [] ? <></> : messages.map((message) => {
+        messages && messages.map((message) => {
+            console.log("message", message)
+            return <Message_ key={idx++} message={message.data}/>
         })
+
     }
-    </>
+    </div>);
     
 }
 

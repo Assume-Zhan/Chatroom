@@ -17,6 +17,7 @@ function Messager(props){
 
     // var group = props.group == null ? [] : props.group;
     var group = ["Name1", "Name2", "Name3"];
+    var idx = 0;
 
     return <>
         <Input 
@@ -28,6 +29,7 @@ function Messager(props){
         />
         {group.map((name) => (
                 <Group
+                    key={idx++}
                     name={name}
                 />
         ))}
