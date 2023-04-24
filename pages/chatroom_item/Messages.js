@@ -16,18 +16,15 @@ function Messages(props){
     const [messages, setMessages] = React.useState([]);
 
     useEffect(() => {
-        console.log("In Messages useEffect", props.messages)
         setMessages(props.messages)
     }, [props.messages])
 
     var idx = 0;
-    console.log("In messages", messages)
 
     return (<div>
     {
         // messages == [] ? <></> : messages.map((message) => {
         messages && messages.map((message) => {
-            console.log("message", message)
             return <Message_ key={idx++} message={message.data}/>
         })
 

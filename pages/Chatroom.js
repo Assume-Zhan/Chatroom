@@ -49,8 +49,6 @@ function Chatroom() {
             // }
             snapshot.forEach(child => {
                 m.push(child.val())
-                console.log(child.val())
-                console.log(m.length)
             })
         }
         com_list.once(
@@ -69,6 +67,27 @@ function Chatroom() {
         })
 
     }, [])
+
+    function Init(){
+
+        var user_email = '';
+
+        firebase.auth().onAuthStateChanged(function(user) {
+
+        });
+
+        var com_list = firebase.database().ref('/com_list');
+        com_list.on(
+            'child_added',
+            function(snapshot) {
+            }
+        )
+
+    }
+
+    window.onload = () => {
+        Init();
+    }
 
 
     return (<>
@@ -107,5 +126,7 @@ function Chatroom() {
         </div>
     </>);
 }
+
+
 
 export default Chatroom;
