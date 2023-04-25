@@ -43,8 +43,10 @@ function Messager(props){
                 <Icon name='shop' />
             </Button.Content>
         </Button>
-        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}>
-            <Button.Content hidden>{props.name}</Button.Content>
+        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}
+            onClick={() => {props.addPerson()}}
+        >
+            <Button.Content hidden>Add new member</Button.Content>
             <Button.Content visible>
                 <Icon name='shop' />
             </Button.Content>

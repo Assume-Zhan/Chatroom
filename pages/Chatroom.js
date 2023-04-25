@@ -109,6 +109,28 @@ function Chatroom() {
         }
     }
 
+    function addPerson(){
+        let email = prompt("Please enter new member's email", "example@gmail.com");
+        if(email != null){
+
+            var com_list = firebase.database().ref('com_list/' + currentGroup);
+            var current_user_list = [];
+
+            if(currentGroup != null){
+                com_list.once('value', (snapshot) => {
+                    console.log(snapshot.val().users);
+                    current_user_list = snapshot.val().users;
+                    current_user_list.push(email);
+                }).then(() => {
+                    var com_list = firebase.database().ref('com_list/' + currentGroup + "/users");
+                    com_list.set(current_user_list);
+                });
+            }
+
+
+        }
+    }
+
     function handleGroupClick(name){
         setCurrentGroup(name);
         var com_list = firebase.database().ref('com_list/' + name);
@@ -123,20 +145,17 @@ function Chatroom() {
                     messages[name].push(snapshot.val());
                     setMessages(messages);
                     forceUpdate();
-                    console.log("Message", snapshot.val());
-                    console.log(messages);
                 }
             })
         }
         else{
         }
-
-        // setPreviousListener(PreviousListener)
     }
 
     return (<>
         <Menu>
             <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
+            <Menu.Item as={Link} to="/chatroom">{user != null ? user.email : "non-user"}</Menu.Item>
             <Menu.Menu position='right'>
                 {
                     user === null ? (
@@ -154,6 +173,7 @@ function Chatroom() {
                 <Messager textAlign='center'
                     group={group}
                     addGroup={addGroup}
+                    addPerson={addPerson}
                     handleGroupClick={handleGroupClick}
                 />
             </div>
