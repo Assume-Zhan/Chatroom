@@ -4,7 +4,11 @@ import { Button, Icon, Input } from 'semantic-ui-react'
 
 function Group(props){
     return <div style={{backgroundColor: "red", margin: 5}}>
-        <Button animated='vertical' style={{height: "55%", width: "55%", }}>
+        <Button 
+            animated='vertical' 
+            style={{height: "55%", width: "55%", }}
+            onClick={() => {props.handleGroupClick(props.name)}}
+        >
             <Button.Content hidden>{props.name}</Button.Content>
             <Button.Content visible>
                 <Icon name='shop' />
@@ -15,9 +19,13 @@ function Group(props){
 
 function Messager(props){
 
-    // var group = props.group == null ? [] : props.group;
-    var group = ["Name1", "Name2", "Name3"];
     var idx = 0;
+    const [group, setGroup] = React.useState([]);
+
+    React.useEffect(() => {
+        console.log("Use effect");
+        setGroup(props.group)
+    }, [props.group])
 
     return <>
         <Input 
@@ -27,12 +35,32 @@ function Messager(props){
             style={{width: "100%"}} 
             onChange={() => {props.handleAddGroup()}}
         />
-        {group.map((name) => (
-                <Group
-                    key={idx++}
-                    name={name}
-                />
-        ))}
+        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}
+            onClick={() => {props.addGroup()}}
+        >
+            <Button.Content hidden>Add new room</Button.Content>
+            <Button.Content visible>
+                <Icon name='shop' />
+            </Button.Content>
+        </Button>
+        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}>
+            <Button.Content hidden>{props.name}</Button.Content>
+            <Button.Content visible>
+                <Icon name='shop' />
+            </Button.Content>
+        </Button>
+        {
+            group && group.map((group_) => {
+                    return <Group
+                        key={idx++}
+                        name={group_.name}
+                        handleGroupClick={props.handleGroupClick}
+                    />
+            })
+            // messages && messages.map((message) => {
+            //     return <Message_ key={idx++} message={message.data}/>
+            // })
+        }
     </>
     
 }

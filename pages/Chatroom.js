@@ -11,9 +11,15 @@ import Messages from './chatroom_item/Messages';
 
 function Chatroom() {
 
-    const [user, setUser] = React.useState(null);
     const navigate = useNavigate();
-    const [messages, setMessages] = React.useState([]);
+    const [user, setUser] = React.useState(null);
+    const [messages, setMessages] = React.useState({});
+    const [group, setGroup] = React.useState([]);
+
+    const [inited, setInited] = React.useState(0);
+    const [ignored, forceUpdate] = React.useReducer(x => x + 1, 0);
+
+    const [currentGroup, setCurrentGroup] = React.useState("");
 
     React.useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -27,18 +33,36 @@ function Chatroom() {
     }
 
     function sendMessage(message){
-        var com_list = firebase.database().ref('com_list');
+        var com_list = firebase.database().ref('com_list/' + currentGroup);
 
         var post_data = {
             data: message,
             email: user.email
         };
 
-        com_list.push({data: post_data.data, email: post_data.email}).key;
-
+        com_list.push(post_data).key;
     }
 
-    useEffect(() => {
+    const callback = snapshot => {
+        group.push(snapshot.val());
+        forceUpdate();
+        return setGroup(group);
+    }
+
+    function init (){
+        if(!inited){
+            console.log("init");
+            var com_list = firebase.database().ref('com_list');
+
+            com_list.on('child_added', callback)
+
+            setInited(1)
+        }
+    }
+
+    init();
+
+    React.useEffect(() => {
         let m = []
         var com_list = firebase.database().ref('/com_list');
         const callback = snapshot => {
@@ -51,6 +75,7 @@ function Chatroom() {
                 m.push(child.val())
             })
         }
+
         com_list.once(
             // 'child_added',
             'value',
@@ -63,47 +88,52 @@ function Chatroom() {
             //     console.log("Messages", messages); }
             callback
         ).then(() => {
-            setMessages(m)
+            setGroup(m)
         })
-
     }, [])
 
-    function Init(){
-
-        var user_email = '';
-
-        firebase.auth().onAuthStateChanged(function(user) {
-
-        });
-
-        var com_list = firebase.database().ref('/com_list');
-        com_list.on(
-            'child_added',
-            function(snapshot) {
-            }
-        )
-
+    function addGroup(){
+        let group = prompt("Please enter your name", "New room");
+        if(group != null){
+            firebase.database().ref('com_list/' + group).set({name: group});
+        }
     }
 
-    window.onload = () => {
-        Init();
-    }
+    function handleGroupClick(name){
+        setCurrentGroup(name);
+        var com_list = firebase.database().ref('com_list/' + name);
 
+        let m = messages;
+        if(m[name] == null){
+            m[name] = []
+            setMessages(m)
+            forceUpdate();
+            com_list.on('child_added', (snapshot) => {
+                if(snapshot.val().data != null){
+                    messages[name].push(snapshot.val());
+                    setMessages(messages);
+                    forceUpdate();
+                    console.log("Message", snapshot.val());
+                    console.log(messages);
+                }
+            })
+        }
+        else{
+        }
+
+        // setPreviousListener(PreviousListener)
+    }
 
     return (<>
         <Menu>
-            <Menu.Item as={Link} to="/">Chatroom</Menu.Item>
+            <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
             <Menu.Menu position='right'>
                 {
                     user === null ? (
-                        <>
-                            <Menu.Item as={Link} to="/signin">Sign in</Menu.Item>
-                            <Menu.Item as={Link} to="/login">Login</Menu.Item>
-                        </> )
-                        : (
-                        <>
+                            <Menu.Item as={Link} to="/">Sign in / Login</Menu.Item>
+                        ) : (
                             <Menu.Item onClick={() => {signout()}}>Logout</Menu.Item>
-                        </> )
+                        )
                     
                 }
             </Menu.Menu>
@@ -111,22 +141,28 @@ function Chatroom() {
         <div style={{display: "flex"}}>
             <div style={{display: "block", width: "20%", height: "100%", textAlign: "center", backgroundColor: "blue"}}>
                 {/* Messager */}
-                <Messager textAlign='center'/>
+                <Messager textAlign='center'
+                    group={group}
+                    addGroup={addGroup}
+                    handleGroupClick={handleGroupClick}
+                />
             </div>
-            <div style={{display: "block", height: "100%", textAlign: "center", backgroundColor: "yellow"}}>
-                {/* Messages */}
-                <Messages
-                    messages={messages}
-                />
-                {/* Input Message */}
-                <UserInput textAlign='right'
-                    sendMessage={sendMessage}
-                />
+            <div style={{display: "block"}}>
+                <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}>
+                    {/* Messages */}
+                    <Messages
+                        messages={messages[currentGroup]}
+                    />
+                </div>
+                <div style={{display: "block", borderLeft: "50px solid #fff", textAlign: "center", backgroundColor: "blue"}}>
+                    {/* Input Message */}
+                    <UserInput textAlign='right'
+                        sendMessage={sendMessage}
+                    />
+                </div>
             </div>
         </div>
     </>);
 }
-
-
 
 export default Chatroom;

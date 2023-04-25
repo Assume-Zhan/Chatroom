@@ -15,9 +15,9 @@ function App(){
     return <BrowserRouter>
         <Routes>
             <Route path="/" element={<StyledHomepage></StyledHomepage>}></Route>
-            <Route path="/signin" element={<Signin></Signin>} exact></Route>
-            <Route path="/login" element={<Login></Login>} exact></Route>
-            <Route path="/chatroom" element={<Chatroom></Chatroom>} exact></Route>
+            <Route path="/signin" element={<Signin></Signin>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/chatroom" element={<Chatroom></Chatroom>}></Route>
         </Routes>
     </BrowserRouter>
 }
