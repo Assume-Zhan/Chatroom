@@ -44,14 +44,23 @@ function Chatroom() {
     }
 
     const callback = snapshot => {
-        group.push(snapshot.val());
-        forceUpdate();
-        return setGroup(group);
+        let auth_flag = false;
+
+        snapshot.val().users.forEach(child => {
+            if(child == firebase.auth().currentUser.email){
+                auth_flag = true;
+            }
+        })
+        
+        if(auth_flag){
+            group.push(snapshot.val());
+            forceUpdate();
+            return setGroup(group);
+        }
     }
 
     function init (){
         if(!inited){
-            console.log("init");
             var com_list = firebase.database().ref('com_list');
 
             com_list.on('child_added', callback)
@@ -65,27 +74,28 @@ function Chatroom() {
     React.useEffect(() => {
         let m = []
         var com_list = firebase.database().ref('/com_list');
+
         const callback = snapshot => {
-            // var m = messages;
-            // m.push(snapshot.val());
-            // if(m != messages){
-            //     setMessages(m);
-            // }
             snapshot.forEach(child => {
-                m.push(child.val())
+
+                let auth_flag = false;
+                
+                child.val().users.map((user_) => {
+                    if(user_ == firebase.auth().currentUser.email){
+                        auth_flag = true;
+                    }
+                })
+                
+                if(auth_flag){
+                    m.push(child.val())
+                    forceUpdate();
+                    return setGroup(group);
+                }
             })
         }
 
         com_list.once(
-            // 'child_added',
             'value',
-            // function(snapshot) {
-            //     var m = messages;
-            //     m.push(snapshot.val());
-            //     if(m != messages){
-            //         setMessages(m);
-            //     }
-            //     console.log("Messages", messages); }
             callback
         ).then(() => {
             setGroup(m)
@@ -95,7 +105,7 @@ function Chatroom() {
     function addGroup(){
         let group = prompt("Please enter your name", "New room");
         if(group != null){
-            firebase.database().ref('com_list/' + group).set({name: group});
+            firebase.database().ref('com_list/' + group).set({name: group, users: [user.email]});
         }
     }
 
