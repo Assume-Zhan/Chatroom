@@ -35,10 +35,12 @@ function Chatroom() {
 
     function sendMessage(message){
         var com_list = firebase.database().ref('com_list/' + currentGroup);
+        const date = new Date();
 
         var post_data = {
             data: message,
-            email: user.email
+            email: user.email,
+            timeStamp: date.getTime()
         };
 
         com_list.push(post_data).key;
@@ -180,8 +182,13 @@ function Chatroom() {
                 handleGroupClick={handleGroupClick}
             />
         </Grid.Column>
-        <Grid.Column width={13} style={{display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
-            <Messages_template style={{height: "100%", width: "100%"}}></Messages_template>
+        <Grid.Column width={13} style={{height: "90vh", display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
+            <Messages_template
+                user={{id:  user != null ? user.email : ""}}
+                style={{height: "100%", width: "100%"}}
+                messages={messages[currentGroup]}
+                sendMessage={sendMessage}
+            />
         </Grid.Column>
     </Grid>);
 }
