@@ -1,15 +1,16 @@
-.chatClass{
+.k-chat{
+    background-color: #212121 !important;
     max-width: none !important;
     width: 100%;
     height: 100% !important;
 }
 
-.k-chat{
-    background-color: #212121 !important;
-}
-
 .k-message-time{
     color: #FFFFFF !important;
+}
+
+.k-message-box{
+    height: 100%
 }
 
 .k-timestamp{

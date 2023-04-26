@@ -172,7 +172,7 @@ function Chatroom() {
                 </Menu.Menu>
             </Menu>
         </Grid.Row>
-        <Grid.Column width={3} style={{display: "block", maxHeight: "90vh", width: "20%", textAlign: "center", overflow: "scroll"}}>
+        <Grid.Column width={3} style={{display: "block", maxHeight: "85vh", width: "20%", textAlign: "center", overflow: "scroll"}}>
             {/* Messager */}
             <Grid.Row style={{height: "5%"}}></Grid.Row>
             <Messager textAlign='center'
@@ -182,7 +182,15 @@ function Chatroom() {
                 handleGroupClick={handleGroupClick}
             />
         </Grid.Column>
-        <Grid.Column width={13} style={{height: "90vh", display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
+        <Grid.Column width={13} style={{
+            height: "90vh", 
+            display: "block", 
+            maxHeight: "90vh",
+            paddingBottom: "0rem", 
+            paddingTop: "0rem", 
+            paddingLeft: "0rem", 
+            paddingRight: "1rem", 
+        }}>
             <Messages_template
                 user={{id:  user != null ? user.email : ""}}
                 style={{height: "100%", width: "100%"}}
