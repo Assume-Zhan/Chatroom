@@ -1,12 +1,13 @@
 import React from "react";
-import '../css/Signup.css'
+import '../css/enter.css'
 import { useNavigate } from "react-router-dom";
 import firebase from "../utils/config";
 import "firebase/compat/auth";
 
 function Signup() {
 
-    function SubmitForm(){
+    function SubmitForm(e){
+        e.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(mail, password).then(
             (userCredential) => {
                 var user = userCredential.user;
@@ -25,7 +26,7 @@ function Signup() {
     const [password, setPassword] = React.useState("");
 
     return <>
-    <form autoComplete='off' className='form' onSubmit={SubmitForm}>
+    <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
             <h1>
             Sign Up
