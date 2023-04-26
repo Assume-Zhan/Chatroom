@@ -19,7 +19,7 @@ function Homepage() {
 
     return <Grid style={{height: '100vh', textAlign: "center"}}>
         <Grid.Row style={{height: '10%'}}></Grid.Row>
-        <Grid.Row center style={{height: '10%', alignItems: "center", justifyContent: "center"}}>
+        <Grid.Row style={{height: '10%', alignItems: "center", justifyContent: "center"}}>
             <Grid.Column style={{width: "20%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
                 <button className='btn block-cube block-cube-hover'>

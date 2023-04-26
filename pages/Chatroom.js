@@ -8,7 +8,6 @@ import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
 import Messages from './chatroom_item/Messages';
-import { Button, Icon, Input } from 'semantic-ui-react'
 
 function Chatroom() {
 
@@ -138,8 +137,8 @@ function Chatroom() {
 
         let m = messages;
         if(m[name] == null){
-            m[name] = []
-            setMessages(m)
+            m[name] = [];
+            setMessages(m);
             forceUpdate();
             com_list.on('child_added', (snapshot) => {
                 if(snapshot.val().data != null){
@@ -185,6 +184,7 @@ function Chatroom() {
             {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
                 {/* Messages */}
                 <Messages
+                    currentUser={user === null ? null : user.email}
                     messages={messages[currentGroup]}
                 />
             {/* </div> */}

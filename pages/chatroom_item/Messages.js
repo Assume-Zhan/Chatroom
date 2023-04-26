@@ -4,7 +4,9 @@ import { Message } from 'semantic-ui-react'
 
 function Message_(props){
     return (
-        <div style={{textAlign: "right"}}>
+        props.me === true ? <div style={{textAlign: "right"}}>
+            <Message>{props.message}</Message>
+        </div> : <div style={{textAlign: "left"}}>
             <Message>{props.message}</Message>
         </div>
     )
@@ -25,7 +27,7 @@ function Messages(props){
     {
         // messages == [] ? <></> : messages.map((message) => {
         messages && messages.map((message) => {
-            return <Message_ key={idx++} message={message.data}/>
+            return <Message_ key={idx++} message={message.data} email={message.email} me={props.currentUser === message.email}/>
         })
 
     }
