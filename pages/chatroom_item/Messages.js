@@ -1,6 +1,8 @@
 import 'semantic-ui-css/semantic.min.css';
 import React, { useEffect } from 'react';
 import { Message } from 'semantic-ui-react'
+import '../../css/message.css'
+import { Chat } from "@progress/kendo-react-conversational-ui";
 
 function Message_(props){
     return (
@@ -27,7 +29,19 @@ function Messages(props){
     {
         // messages == [] ? <></> : messages.map((message) => {
         messages && messages.map((message) => {
-            return <Message_ key={idx++} message={message.data} email={message.email} me={props.currentUser === message.email}/>
+            // return <Message_
+            //     key={idx++}
+            //     message={message.data}
+            //     email={message.email}
+            //     me={props.currentUser === message.email}
+            // />
+            return <div>
+                <Chat
+                    user={message.email}
+                    messages={message.data}
+                    width={400}
+                />
+            </div>
         })
 
     }

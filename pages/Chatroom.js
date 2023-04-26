@@ -8,6 +8,7 @@ import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
 import Messages from './chatroom_item/Messages';
+import Messages_template from './chatroom_item/Message_template';
 
 function Chatroom() {
 
@@ -180,21 +181,7 @@ function Chatroom() {
             />
         </Grid.Column>
         <Grid.Column width={13} style={{display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
-            <Grid.Row style={{height: "80vh", overflow: "scroll"}}>
-            {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
-                {/* Messages */}
-                <Messages
-                    currentUser={user === null ? null : user.email}
-                    messages={messages[currentGroup]}
-                />
-            {/* </div> */}
-            </Grid.Row>
-            <Grid.Row style={{maxHeight: "10vh"}}>
-                {/* Input Message */}
-                <UserInput
-                    sendMessage={sendMessage}
-                />
-            </Grid.Row>
+            <Messages_template style={{height: "100%", width: "100%"}}></Messages_template>
         </Grid.Column>
     </Grid>);
 }
