@@ -168,8 +168,8 @@ function Chatroom() {
                     }
                 </Menu.Menu>
             </Menu>
-        </Grid.Row>
-        <Grid.Row style={{display: "flex", height: "90%"}}>
+        </Grid.Row >
+        <Grid.Row>
             <Grid.Column width={3} style={{display: "block", width: "20%", textAlign: "center", backgroundColor: "blue"}}>
                 {/* Messager */}
                 <Messager textAlign='center'
@@ -180,18 +180,20 @@ function Chatroom() {
                 />
             </Grid.Column>
             <Grid.Column width={13} style={{display: "block"}}>
-                <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}>
+                <Grid.Row>
+                {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
                     {/* Messages */}
                     <Messages
                         messages={messages[currentGroup]}
                     />
-                </div>
-                <div style={{display: "block", borderLeft: "50px solid #fff", textAlign: "center", backgroundColor: "blue"}}>
+                {/* </div> */}
+                </Grid.Row>
+                <Grid.Row>
                     {/* Input Message */}
-                    <UserInput textAlign='right'
+                    <UserInput
                         sendMessage={sendMessage}
                     />
-                </div>
+                </Grid.Row>
             </Grid.Column>
         </Grid.Row>
     </Grid>);

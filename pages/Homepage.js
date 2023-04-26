@@ -7,15 +7,53 @@ function Homepage() {
 
     const [activeItem, setActiveItem] = React.useState("signup");
 
+    function pressLogin(e){
+        e.preventDefault();
+        setActiveItem("login");
+    }
+
+    function pressSignup(e){
+        e.preventDefault();
+        setActiveItem("signup");
+    }
+
     return <Grid style={{height: '100vh', textAlign: "center"}}>
         <Grid.Row style={{height: '10%'}}></Grid.Row>
         <Grid.Row style={{height: '10%'}}>
             <Grid.Column width={5}/>
-            <Grid.Column width={6}>
-                <Menu widths="2">
-                    <Menu.Item active={activeItem === 'signup'} onClick={() => {setActiveItem("signup")}}>Signup</Menu.Item>
-                    <Menu.Item active={activeItem === 'login'} onClick={() => {setActiveItem("login")}}>Login</Menu.Item>
-                </Menu>
+            <Grid.Column width={6} style={{display: "flex"}}>
+            <form autoComplete='off' className='form' onSubmit={(e) => pressLogin(e)}>
+                <button className='form btn block-cube block-cube-hover'>
+                    <div className='bg-top'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg-right'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='text'>
+                    Login
+                    </div>
+                </button>
+            </form>
+            <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
+                <button className='btn block-cube block-cube-hover'>
+                    <div className='bg-top'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg-right'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='text'>
+                    Signup
+                    </div>
+                </button>
+            </form>
             </Grid.Column>
             <Grid.Column width={5}/>
         </Grid.Row>
