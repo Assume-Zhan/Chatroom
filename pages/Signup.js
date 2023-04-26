@@ -14,6 +14,8 @@ function Signup() {
                 alert("success", "Sign up success!");
             }).catch((error) => {
                 alert(error.message);
+                setMail("");
+                setPassword("");
             }
         )
     }
@@ -23,50 +25,50 @@ function Signup() {
     const [password, setPassword] = React.useState("");
 
     return <>
-    <form autoComplete='off' className='form'>
-    <div className='control'>
-        <h1>
-        Sign In
-        </h1>
-    </div>
-    <div className='control block-cube block-input'>
-        <input name='username' placeholder='Username' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
-        <div className='bg-top'>
-        <div className='bg-inner'></div>
+    <form autoComplete='off' className='form' onSubmit={SubmitForm}>
+        <div className='control'>
+            <h1>
+            Sign Up
+            </h1>
         </div>
-        <div className='bg-right'>
-        <div className='bg-inner'></div>
+        <div className='control block-cube block-input'>
+            <input name='username' placeholder='Username' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
+            <div className='bg-top'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+            <div className='bg-inner'></div>
+            </div>
         </div>
-        <div className='bg'>
-        <div className='bg-inner'></div>
+        <div className='control block-cube block-input'>
+            <input name='password' placeholder='Password' type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+            <div className='bg-top'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+            <div className='bg-inner'></div>
+            </div>
         </div>
-    </div>
-    <div className='control block-cube block-input'>
-        <input name='password' placeholder='Password' type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}/>
-        <div className='bg-top'>
-        <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-        <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-        <div className='bg-inner'></div>
-        </div>
-    </div>
-    <button className='btn block-cube block-cube-hover' type='button' onClick={SubmitForm}>
-        <div className='bg-top'>
-        <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-        <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-        <div className='bg-inner'></div>
-        </div>
-        <div className='text'>
-        Sign up
-        </div>
-    </button>
+        <button className='btn block-cube block-cube-hover' type='submit' >
+            <div className='bg-top'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='text'>
+            Sign up
+            </div>
+        </button>
     </form>
     </>
 
