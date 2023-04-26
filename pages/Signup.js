@@ -28,7 +28,7 @@ function Signup() {
     return <>
     <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
-            <h1>
+            <h1 style={{textAlign: "center"}}>
             Sign Up
             </h1>
         </div>

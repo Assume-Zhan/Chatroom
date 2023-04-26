@@ -26,7 +26,7 @@ function Login() {
     return <>
     <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
-            <h1>
+            <h1 style={{textAlign: "center"}}>
             Login
             </h1>
         </div>
