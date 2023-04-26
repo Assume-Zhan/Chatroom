@@ -6,7 +6,7 @@ function Group(props){
     return <div style={{backgroundColor: "red", margin: 5}}>
         <Button 
             animated='vertical' 
-            style={{height: "55%", width: "55%", }}
+            style={{width: "55%", }}
             onClick={() => {props.handleGroupClick(props.name)}}
         >
             <Button.Content hidden>{props.name}</Button.Content>
@@ -35,7 +35,7 @@ function Messager(props){
             style={{width: "100%"}} 
             onChange={() => {props.handleAddGroup()}}
         />
-        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}
+        <Button animated='vertical' style={{width: "55%", margin: 5}}
             onClick={() => {props.addGroup()}}
         >
             <Button.Content hidden>Add new room</Button.Content>
@@ -43,7 +43,7 @@ function Messager(props){
                 <Icon name='shop' />
             </Button.Content>
         </Button>
-        <Button animated='vertical' style={{height: "55%", width: "55%", margin: 5}}
+        <Button animated='vertical' style={{width: "55%", margin: 5}}
             onClick={() => {props.addPerson()}}
         >
             <Button.Content hidden>Add new member</Button.Content>

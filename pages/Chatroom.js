@@ -1,4 +1,4 @@
-import { Menu, Divider } from 'semantic-ui-react';
+import { Menu, Grid } from 'semantic-ui-react';
 import { Link } from'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import 'firebase/compat/database'
@@ -152,23 +152,25 @@ function Chatroom() {
         }
     }
 
-    return (<>
-        <Menu>
-            <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
-            <Menu.Item as={Link} to="/chatroom">{user != null ? user.email : "non-user"}</Menu.Item>
-            <Menu.Menu position='right'>
-                {
-                    user === null ? (
-                            <Menu.Item as={Link} to="/">Sign in / Login</Menu.Item>
-                        ) : (
-                            <Menu.Item onClick={() => {signout()}}>Logout</Menu.Item>
-                        )
-                    
-                }
-            </Menu.Menu>
-        </Menu>
-        <div style={{display: "flex"}}>
-            <div style={{display: "block", width: "20%", height: "100%", textAlign: "center", backgroundColor: "blue"}}>
+    return (<Grid style={{height: '100vh'}}>
+        <Grid.Row style={{height: '10%'}}>
+            <Menu style={{width: '100%'}}>
+                <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
+                <Menu.Item as={Link} to="/chatroom">{user != null ? user.email : "non-user"}</Menu.Item>
+                <Menu.Menu position='right'>
+                    {
+                        user === null ? (
+                                <Menu.Item as={Link} to="/">Sign in / Login</Menu.Item>
+                            ) : (
+                                <Menu.Item onClick={() => {signout()}}>Logout</Menu.Item>
+                            )
+                        
+                    }
+                </Menu.Menu>
+            </Menu>
+        </Grid.Row>
+        <Grid.Row style={{display: "flex", height: "90%"}}>
+            <Grid.Column width={3} style={{display: "block", width: "20%", textAlign: "center", backgroundColor: "blue"}}>
                 {/* Messager */}
                 <Messager textAlign='center'
                     group={group}
@@ -176,8 +178,8 @@ function Chatroom() {
                     addPerson={addPerson}
                     handleGroupClick={handleGroupClick}
                 />
-            </div>
-            <div style={{display: "block"}}>
+            </Grid.Column>
+            <Grid.Column width={13} style={{display: "block"}}>
                 <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}>
                     {/* Messages */}
                     <Messages
@@ -190,9 +192,9 @@ function Chatroom() {
                         sendMessage={sendMessage}
                     />
                 </div>
-            </div>
-        </div>
-    </>);
+            </Grid.Column>
+        </Grid.Row>
+    </Grid>);
 }
 
 export default Chatroom;

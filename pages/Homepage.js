@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Grid, GridColumn } from "semantic-ui-react";
+import { Menu, Grid } from "semantic-ui-react";
 import Login from "./Login";
 import Signup from "./Signup";
 
