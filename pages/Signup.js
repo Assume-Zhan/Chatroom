@@ -30,7 +30,7 @@ function Signup() {
         </h1>
     </div>
     <div className='control block-cube block-input'>
-        <input name='username' placeholder='Username' type='text'/>
+        <input name='username' placeholder='Username' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
         <div className='bg-top'>
         <div className='bg-inner'></div>
         </div>
@@ -42,7 +42,7 @@ function Signup() {
         </div>
     </div>
     <div className='control block-cube block-input'>
-        <input name='password' placeholder='Password' type='password'/>
+        <input name='password' placeholder='Password' type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}/>
         <div className='bg-top'>
         <div className='bg-inner'></div>
         </div>
@@ -53,7 +53,7 @@ function Signup() {
         <div className='bg-inner'></div>
         </div>
     </div>
-    <button className='btn block-cube block-cube-hover' type='button'>
+    <button className='btn block-cube block-cube-hover' type='button' onClick={SubmitForm}>
         <div className='bg-top'>
         <div className='bg-inner'></div>
         </div>
@@ -64,7 +64,7 @@ function Signup() {
         <div className='bg-inner'></div>
         </div>
         <div className='text'>
-        Log In
+        Sign up
         </div>
     </button>
     </form>
