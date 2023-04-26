@@ -19,3 +19,10 @@
 
 </html>
 ```
+### Setup firebase
+
+```bash
+firebase deploy
+```
+
+- Site : [https://software-studio-chatroom-59f2f.web.app](https://software-studio-chatroom-59f2f.web.app)

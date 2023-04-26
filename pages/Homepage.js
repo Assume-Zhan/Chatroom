@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import Login from "./Login";
 import Signup from "./Signup";
 
@@ -22,22 +22,6 @@ function Homepage() {
         <Grid.Row style={{height: '10%'}}>
             <Grid.Column width={5}/>
             <Grid.Column width={6} style={{display: "flex"}}>
-            <form autoComplete='off' className='form' onSubmit={(e) => pressLogin(e)}>
-                <button className='form btn block-cube block-cube-hover'>
-                    <div className='bg-top'>
-                    <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg-right'>
-                    <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg'>
-                    <div className='bg-inner'></div>
-                    </div>
-                    <div className='text'>
-                    Login
-                    </div>
-                </button>
-            </form>
             <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
                 <button className='btn block-cube block-cube-hover'>
                     <div className='bg-top'>
@@ -51,6 +35,22 @@ function Homepage() {
                     </div>
                     <div className='text'>
                     Signup
+                    </div>
+                </button>
+            </form>
+            <form autoComplete='off' className='form' onSubmit={(e) => pressLogin(e)}>
+                <button className='form btn block-cube block-cube-hover'>
+                    <div className='bg-top'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg-right'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='text'>
+                    Login
                     </div>
                 </button>
             </form>

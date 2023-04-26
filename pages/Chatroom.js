@@ -8,6 +8,7 @@ import firebase from '../utils/config';
 import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
 import Messages from './chatroom_item/Messages';
+import { Button, Icon, Input } from 'semantic-ui-react'
 
 function Chatroom() {
 
@@ -152,9 +153,9 @@ function Chatroom() {
         }
     }
 
-    return (<Grid style={{height: '100vh'}}>
-        <Grid.Row style={{height: '10%'}}>
-            <Menu style={{width: '100%'}}>
+    return (<Grid style={{height: "100vh", maxHeight: "100vh", overflow: "hidden"}}>
+        <Grid.Row style={{height: '10%', maxHeight: "10vh", overflow: "hidden"}}>
+            <Menu inverted style={{width: '100%'}}>
                 <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
                 <Menu.Item as={Link} to="/chatroom">{user != null ? user.email : "non-user"}</Menu.Item>
                 <Menu.Menu position='right'>
@@ -168,34 +169,33 @@ function Chatroom() {
                     }
                 </Menu.Menu>
             </Menu>
-        </Grid.Row >
-        <Grid.Row>
-            <Grid.Column width={3} style={{display: "block", width: "20%", textAlign: "center", backgroundColor: "blue"}}>
-                {/* Messager */}
-                <Messager textAlign='center'
-                    group={group}
-                    addGroup={addGroup}
-                    addPerson={addPerson}
-                    handleGroupClick={handleGroupClick}
-                />
-            </Grid.Column>
-            <Grid.Column width={13} style={{display: "block"}}>
-                <Grid.Row>
-                {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
-                    {/* Messages */}
-                    <Messages
-                        messages={messages[currentGroup]}
-                    />
-                {/* </div> */}
-                </Grid.Row>
-                <Grid.Row>
-                    {/* Input Message */}
-                    <UserInput
-                        sendMessage={sendMessage}
-                    />
-                </Grid.Row>
-            </Grid.Column>
         </Grid.Row>
+        <Grid.Column width={3} style={{display: "block", maxHeight: "90vh", width: "20%", textAlign: "center", overflow: "scroll"}}>
+            {/* Messager */}
+            <Grid.Row style={{height: "5%"}}></Grid.Row>
+            <Messager textAlign='center'
+                group={group}
+                addGroup={addGroup}
+                addPerson={addPerson}
+                handleGroupClick={handleGroupClick}
+            />
+        </Grid.Column>
+        <Grid.Column width={13} style={{display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
+            <Grid.Row style={{maxHeight: "80vh", overflow: "scroll"}}>
+            {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
+                {/* Messages */}
+                <Messages
+                    messages={messages[currentGroup]}
+                />
+            {/* </div> */}
+            </Grid.Row>
+            <Grid.Row style={{maxHeight: "10vh"}}>
+                {/* Input Message */}
+                <UserInput
+                    sendMessage={sendMessage}
+                />
+            </Grid.Row>
+        </Grid.Column>
     </Grid>);
 }
 

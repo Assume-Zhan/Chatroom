@@ -28,13 +28,6 @@ function Messager(props){
     }, [props.group])
 
     return <>
-        <Input 
-            type="text" 
-            icon="users" 
-            placeholder="Add..." 
-            style={{width: "100%"}} 
-            onChange={() => {props.handleAddGroup()}}
-        />
         <Button animated='vertical' style={{width: "55%", margin: 5}}
             onClick={() => {props.addGroup()}}
         >
