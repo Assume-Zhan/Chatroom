@@ -19,9 +19,8 @@ function Homepage() {
 
     return <Grid style={{height: '100vh', textAlign: "center"}}>
         <Grid.Row style={{height: '10%'}}></Grid.Row>
-        <Grid.Row style={{height: '10%'}}>
-            <Grid.Column width={5}/>
-            <Grid.Column width={6} style={{display: "flex"}}>
+        <Grid.Row center style={{height: '10%', alignItems: "center", justifyContent: "center"}}>
+            <Grid.Column style={{width: "20%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
                 <button className='btn block-cube block-cube-hover'>
                     <div className='bg-top'>
@@ -55,7 +54,6 @@ function Homepage() {
                 </button>
             </form>
             </Grid.Column>
-            <Grid.Column width={5}/>
         </Grid.Row>
         {
             activeItem === "signup" ? <Grid.Row textAlign="center" style={{height: '40%'}}><Signup style={{}}></Signup></Grid.Row> :

@@ -181,7 +181,7 @@ function Chatroom() {
             />
         </Grid.Column>
         <Grid.Column width={13} style={{display: "block", maxHeight: "90vh", flexDirection: "columnReverse", overflow: "scroll"}}>
-            <Grid.Row style={{maxHeight: "80vh", overflow: "scroll"}}>
+            <Grid.Row style={{height: "80vh", overflow: "scroll"}}>
             {/* <div style={{display: "block", borderLeft: "50px solid #fff", overflow: "scroll", maxHeight: "700px", height: "32", textAlign: "center", backgroundColor: "yellow"}}> */}
                 {/* Messages */}
                 <Messages
