@@ -176,7 +176,7 @@ function Chatroom() {
         <Grid.Row style={{height: '10%', maxHeight: "10vh", overflow: "hidden"}}>
             <Menu inverted style={{width: '100%'}}>
                 <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
-                <Menu.Item as={Link} to="/chatroom">{username}</Menu.Item>
+                <Menu.Item as={Link} to="/setprofile">{username}</Menu.Item>
                 <Menu.Menu position='right'>
                     {
                         user === null ? (

@@ -5,46 +5,21 @@ import firebase from "../utils/config";
 import "firebase/compat/auth";
 import 'firebase/compat/database'
 
-function Signup() {
+function SetProfile() {
 
     function SubmitForm(e){
         e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(mail, password).then(
-            (userCredential) => {
-                var user = userCredential.user;
+        firebase.auth().onAuthStateChanged(
+            (user) => {
 
                 /*
                  * Push user profile
                  */
                 var users = firebase.database().ref('com_list/users');
-                var userLength = firebase.database().ref('com_list/userlength');
-                userLength.once('value', (snapshot) => {
-
-                    if(snapshot.val() == null) {
-                        userLength.set(0);
-                        users.push({
-                            email: user.email,
-                            id: 0,
-                            name: username
-                        });
-                    }
-                    else{
-                        users.push({
-                            email: user.email,
-                            id: snapshot.val(),
-                            name: username
-                        });
-                    }
-
-                    userLength.set(snapshot.val() + 1);
-                    alert("success", "Sign up success!");
-                    navigate('/chatroom')
+                users.once('value', (snapshot) => {
+                    
                 })
                 
-            }).catch((error) => {
-                alert(error.message);
-                setMail("");
-                setPassword("");
             }
         )
     }
@@ -58,7 +33,7 @@ function Signup() {
     <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
             <h1 style={{textAlign: "center"}}>
-            Sign Up
+            Set your profile
             </h1>
         </div>
         <div className='control block-cube block-input'>
@@ -108,7 +83,7 @@ function Signup() {
             <div className='bg-inner'></div>
             </div>
             <div className='text'>
-            Sign up
+            Submit
             </div>
         </button>
     </form>
@@ -116,4 +91,4 @@ function Signup() {
 
 }
 
-export default Signup;
+export default SetProfile;
