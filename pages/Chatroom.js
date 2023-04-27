@@ -5,9 +5,7 @@ import 'firebase/compat/database'
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from 'react';
 import firebase from '../utils/config';
-import UserInput from './chatroom_item/UserInput';
 import Messager from './chatroom_item/Messager';
-import Messages from './chatroom_item/Messages';
 import Messages_template from './chatroom_item/Message_template';
 
 function Chatroom() {
@@ -24,7 +22,10 @@ function Chatroom() {
 
     React.useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setUser(user);
+            if(user === null){
+                navigate("/")
+            }
+            else setUser(user);
         })
     }, [])
 
@@ -39,7 +40,7 @@ function Chatroom() {
 
         var post_data = {
             data: message,
-            email: user.email,
+            email: user != null ? user.email : "non-user",
             timeStamp: date.getTime()
         };
 
@@ -50,7 +51,7 @@ function Chatroom() {
         let auth_flag = false;
 
         snapshot.val().users.forEach(child => {
-            if(child == firebase.auth().currentUser.email){
+            if(firebase.auth().currentUser != null && child == firebase.auth().currentUser.email){
                 auth_flag = true;
             }
         })
@@ -84,7 +85,7 @@ function Chatroom() {
                 let auth_flag = false;
                 
                 child.val().users.map((user_) => {
-                    if(user_ == firebase.auth().currentUser.email){
+                    if(firebase.auth().currentUser != null && user_ == firebase.auth().currentUser.email){
                         auth_flag = true;
                     }
                 })
