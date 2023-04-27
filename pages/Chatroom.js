@@ -12,6 +12,7 @@ function Chatroom() {
 
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
+    const [username, setUsername] = React.useState("");
     const [messages, setMessages] = React.useState({});
     const [group, setGroup] = React.useState([]);
 
@@ -21,11 +22,26 @@ function Chatroom() {
     const [currentGroup, setCurrentGroup] = React.useState("");
 
     React.useEffect(() => {
+
         firebase.auth().onAuthStateChanged(user => {
             if(user === null){
                 navigate("/")
             }
-            else setUser(user);
+            else{
+                setUser(user);
+
+                /*
+                 * Get user profile name
+                 */
+                var users = firebase.database().ref('com_list/users');
+                users.once('value', (snapshot) => {
+                    snapshot.forEach((_) => {
+                        if(_.val().email == user.email){
+                            setUsername(_.val().name);
+                        }
+                    });
+                });
+            }
         })
     }, [])
 
@@ -65,7 +81,7 @@ function Chatroom() {
 
     function init (){
         if(!inited){
-            var com_list = firebase.database().ref('com_list');
+            var com_list = firebase.database().ref('com_list/rooms');
 
             com_list.on('child_added', callback)
 
@@ -77,7 +93,7 @@ function Chatroom() {
 
     React.useEffect(() => {
         let m = []
-        var com_list = firebase.database().ref('/com_list');
+        var com_list = firebase.database().ref('/com_list/rooms');
 
         const callback = snapshot => {
             snapshot.forEach(child => {
@@ -160,7 +176,7 @@ function Chatroom() {
         <Grid.Row style={{height: '10%', maxHeight: "10vh", overflow: "hidden"}}>
             <Menu inverted style={{width: '100%'}}>
                 <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
-                <Menu.Item as={Link} to="/chatroom">{user != null ? user.email : "non-user"}</Menu.Item>
+                <Menu.Item as={Link} to="/chatroom">{username}</Menu.Item>
                 <Menu.Menu position='right'>
                     {
                         user === null ? (

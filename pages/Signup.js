@@ -12,26 +12,23 @@ function Signup() {
         firebase.auth().createUserWithEmailAndPassword(mail, password).then(
             (userCredential) => {
                 var user = userCredential.user;
-                alert("success", "Sign up success!");
 
                 /*
                  * Push user profile
                  */
-                let userLength = 0;
                 var users = firebase.database().ref('com_list/users');
-                users.once('value', (snapshot) => {
-                    snapshot.forEach((_) => {
-                        userLength++;
-                    });
-                }).then(() => {
+                var userLength = firebase.database().ref('com_list/userlength');
+                userLength.once('value', (snapshot) => {
+                    if(snapshot.val() == null) userLength.set(0);
                     users.push({
                         email: user.email,
-                        id: userLength,
+                        id: snapshot.val(),
                         name: username
                     });
-                });
-
-                navigate('/chatroom')
+                    userLength.set(snapshot.val() + 1);
+                    alert("success", "Sign up success!");
+                    navigate('/chatroom')
+                })
                 
             }).catch((error) => {
                 alert(error.message);
