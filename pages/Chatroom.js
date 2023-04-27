@@ -46,11 +46,12 @@ function Chatroom() {
         navigate('/');
     }
 
-    function sendMessage(message){
+    function sendMessage(message, username){
         var com_list = firebase.database().ref('com_list/rooms/' + currentGroup);
         const date = new Date();
 
         var post_data = {
+            username: username,
             data: message,
             email: user != null ? user.email : "non-user",
             timeStamp: date.getTime()
@@ -205,6 +206,7 @@ function Chatroom() {
         }}>
             <Messages_template
                 user={{id:  user != null ? user.email : ""}}
+                username={username}
                 style={{height: "100%", width: "100%"}}
                 messages={messages[currentGroup]}
                 sendMessage={sendMessage}
