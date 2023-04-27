@@ -16,28 +16,29 @@ function Signup() {
                 /*
                  * Push user profile
                  */
-                var users = firebase.database().ref('com_list/users');
+                var users = firebase.database().ref('com_list/users/' + user.uid);
                 var userLength = firebase.database().ref('com_list/userlength');
                 userLength.once('value', (snapshot) => {
 
                     if(snapshot.val() == null) {
                         userLength.set(0);
-                        users.push({
+                        users.set({
                             email: user.email,
                             id: 0,
-                            name: username
+                            name: username,
                         });
                     }
                     else{
-                        users.push({
+                        users.set({
                             email: user.email,
                             id: snapshot.val(),
-                            name: username
+                            name: username,
                         });
                     }
 
                     userLength.set(snapshot.val() + 1);
                     alert("success", "Sign up success!");
+                }).then(() => {
                     navigate('/chatroom')
                 })
                 

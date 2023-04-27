@@ -33,13 +33,9 @@ function Chatroom() {
                 /*
                  * Get user profile name
                  */
-                var users = firebase.database().ref('com_list/users');
+                var users = firebase.database().ref('com_list/users/' + user.uid);
                 users.once('value', (snapshot) => {
-                    snapshot.forEach((_) => {
-                        if(_.val().email == user.email){
-                            setUsername(_.val().name);
-                        }
-                    });
+                    if(snapshot.val() != null) setUsername(snapshot.val().name);
                 });
             }
         })
@@ -138,7 +134,6 @@ function Chatroom() {
 
             if(currentGroup != null){
                 com_list.once('value', (snapshot) => {
-                    console.log(snapshot.val().users);
                     current_user_list = snapshot.val().users;
                     current_user_list.push(email);
                 }).then(() => {

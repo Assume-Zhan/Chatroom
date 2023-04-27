@@ -13,21 +13,26 @@ function SetProfile() {
             (user) => {
 
                 /*
-                 * Push user profile
+                 * Set user profile
                  */
-                var users = firebase.database().ref('com_list/users');
+                if(user === null) return;
+                var users = firebase.database().ref('com_list/users/' + user.uid);
                 users.once('value', (snapshot) => {
-                    
-                })
-                
+                    var tempData = snapshot.val();
+                    tempData.name = username;
+                    if(tempData != null){
+                        users.set(tempData);
+                    }
+                }).then(() => {
+                    alert("Set profile successfully");
+                    navigate('/chatroom');
+                });
             }
         )
     }
 
     const navigate = useNavigate();
     const [username, setUsername] = React.useState("");
-    const [mail, setMail] = React.useState("");
-    const [password, setPassword] = React.useState("");
 
     return <>
     <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
@@ -38,30 +43,6 @@ function SetProfile() {
         </div>
         <div className='control block-cube block-input'>
             <input name='username' placeholder='Username' type='text' value={username} onChange={(e) => {setUsername(e.target.value)}}/>
-            <div className='bg-top'>
-            <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-            <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-            <div className='bg-inner'></div>
-            </div>
-        </div>
-        <div className='control block-cube block-input'>
-            <input name='email' placeholder='Email' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
-            <div className='bg-top'>
-            <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-            <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-            <div className='bg-inner'></div>
-            </div>
-        </div>
-        <div className='control block-cube block-input'>
-            <input name='password' placeholder='Password' type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}/>
             <div className='bg-top'>
             <div className='bg-inner'></div>
             </div>
