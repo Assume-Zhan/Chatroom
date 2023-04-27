@@ -26,7 +26,7 @@ function SetProfile() {
                     }
                 }).then(() => {
                     alert("Set profile successfully");
-                    // navigate('/chatroom');
+                    navigate('/chatroom');
                 });
             }
         )
@@ -47,9 +47,19 @@ function SetProfile() {
                 };
                 var storageReference = firebase.storage().ref('com_list/users/' + user.uid + "/img.png");
                 storageReference.put(e.target.files[0], metadata).then(() => {
-                    console.log(storageReference.getDownloadURL().then((url) => {
-                        console.log(url)
-                    }))
+                    storageReference.getDownloadURL().then((url) => {
+                        var users = firebase.database().ref('com_list/users/' + user.uid);
+                        users.once('value', (snapshot) => {
+                            var tempData = snapshot.val();
+                            tempData.imgURL = url;
+                            if(tempData != null){
+                                users.set(tempData);
+                            }
+                        }).then(() => {
+                            alert("Set profile picture successfully");
+                            navigate('/chatroom');
+                        });
+                    })
                 })
                 
             }
