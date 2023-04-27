@@ -7,15 +7,20 @@ import "firebase/compat/auth";
 function Login() {
 
     function SubmitForm(e){
-        e.preventDefault();
-        firebase.auth().signInWithEmailAndPassword(mail, password).then(
-            (userCredential) => {
-                var user = userCredential.user;
 
-                navigate('/chatroom')
+        /* Prevent refresh the page when submit the form */
+        e.preventDefault();
+
+        /* Login with current user */
+        firebase.auth().signInWithEmailAndPassword(mail, password).then(
+            (_) => {
+                /* Successfully login, redirect to chatroom */
+                navigate('/chatroom');
                 alert("success", "Login success!");
             }).catch((error) => {
                 alert(error.message);
+                setMail("");
+                setPassword("");
             }
         )
     }

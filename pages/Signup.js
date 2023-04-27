@@ -9,7 +9,11 @@ import 'firebase/compat/storage'
 function Signup() {
 
     function SubmitForm(e){
+
+        /* Prevent refresh the page when submit the form */
         e.preventDefault();
+
+        /* Create a new user */
         firebase.auth().createUserWithEmailAndPassword(mail, password).then(
             (userCredential) => {
                 var user = userCredential.user;
@@ -43,10 +47,15 @@ function Signup() {
                             imgURL: imgURL,
                         });
                     }
-
+                    
+                    /* Update user length  */
                     userLength.set(snapshot.val() + 1);
-                    alert("success", "Sign up success!");
+
                 }).then(() => {
+                    /* Success alert */
+                    alert("success", "Sign up success!");
+
+                    /* Navigate to chatroom */
                     navigate('/chatroom')
                 })
                 
@@ -54,6 +63,7 @@ function Signup() {
                 alert(error.message);
                 setMail("");
                 setPassword("");
+                setUsername("");
             }
         )
     }
