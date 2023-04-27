@@ -13,6 +13,7 @@ function Chatroom() {
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
     const [username, setUsername] = React.useState("");
+    const [imgURL, setImgURL] = React.useState("");
     const [messages, setMessages] = React.useState({});
     const [group, setGroup] = React.useState([]);
 
@@ -35,7 +36,10 @@ function Chatroom() {
                  */
                 var users = firebase.database().ref('com_list/users/' + user.uid);
                 users.once('value', (snapshot) => {
-                    if(snapshot.val() != null) setUsername(snapshot.val().name);
+                    if(snapshot.val() != null) {
+                        setUsername(snapshot.val().name);
+                        setImgURL(snapshot.val().imgURL);
+                    }
                 });
             }
         })
@@ -54,7 +58,8 @@ function Chatroom() {
             username: username,
             data: message,
             email: user != null ? user.email : "non-user",
-            timeStamp: date.getTime()
+            timeStamp: date.getTime(),
+            imgURL: imgURL
         };
 
         com_list.push(post_data).key;

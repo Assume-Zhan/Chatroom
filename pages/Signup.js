@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import firebase from "../utils/config";
 import "firebase/compat/auth";
 import 'firebase/compat/database'
+import 'firebase/compat/storage'
 
 function Signup() {
 
@@ -20,12 +21,18 @@ function Signup() {
                 var userLength = firebase.database().ref('com_list/userlength');
                 userLength.once('value', (snapshot) => {
 
+                    /*
+                     * Set and get default image
+                     */
+                    var imgURL = 'https://i.imgur.com/AkiqL9I.png';
+
                     if(snapshot.val() == null) {
                         userLength.set(0);
                         users.set({
                             email: user.email,
                             id: 0,
                             name: username,
+                            imgURL: imgURL,
                         });
                     }
                     else{
@@ -33,6 +40,7 @@ function Signup() {
                             email: user.email,
                             id: snapshot.val(),
                             name: username,
+                            imgURL: imgURL,
                         });
                     }
 
