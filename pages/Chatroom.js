@@ -51,7 +51,7 @@ function Chatroom() {
     }
 
     function sendMessage(message){
-        var com_list = firebase.database().ref('com_list/' + currentGroup);
+        var com_list = firebase.database().ref('com_list/rooms/' + currentGroup);
         const date = new Date();
 
         var post_data = {
@@ -125,7 +125,7 @@ function Chatroom() {
     function addGroup(){
         let group = prompt("Please enter your name", "New room");
         if(group != null){
-            firebase.database().ref('com_list/' + group).set({name: group, users: [user.email]});
+            firebase.database().ref('com_list/rooms/' + group).set({name: group, users: [user.email]});
         }
     }
 
@@ -133,7 +133,7 @@ function Chatroom() {
         let email = prompt("Please enter new member's email", "example@gmail.com");
         if(email != null){
 
-            var com_list = firebase.database().ref('com_list/' + currentGroup);
+            var com_list = firebase.database().ref('com_list/rooms/' + currentGroup);
             var current_user_list = [];
 
             if(currentGroup != null){
@@ -142,7 +142,7 @@ function Chatroom() {
                     current_user_list = snapshot.val().users;
                     current_user_list.push(email);
                 }).then(() => {
-                    var com_list = firebase.database().ref('com_list/' + currentGroup + "/users");
+                    var com_list = firebase.database().ref('com_list/rooms/' + currentGroup + "/users");
                     com_list.set(current_user_list);
                 });
             }
@@ -153,7 +153,7 @@ function Chatroom() {
 
     function handleGroupClick(name){
         setCurrentGroup(name);
-        var com_list = firebase.database().ref('com_list/' + name);
+        var com_list = firebase.database().ref('com_list/rooms/' + name);
 
         let m = messages;
         if(m[name] == null){
