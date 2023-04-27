@@ -7,7 +7,7 @@ import "@progress/kendo-theme-default/dist/all.css";
 const initialMessages = (messages, name) => {
     var m = []
     messages != null ? messages.map((message) => {
-        console.log(message)
+
         const user = {
             name: message.username,
             id: message.email,

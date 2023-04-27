@@ -18,23 +18,21 @@ function SetProfile() {
                  */
                 if(user === null) return;
                 var users = firebase.database().ref('com_list/users/' + user.uid);
-                users.once('value', (snapshot) => {
+
+                users.get().then((snapshot) => {
                     var tempData = snapshot.val();
                     tempData.name = username;
                     if(tempData != null){
                         users.set(tempData);
                     }
-                }).then(() => {
-                    alert("Set profile successfully");
                     navigate('/chatroom');
-                });
+                })
             }
         )
     }
 
     function SubmitForm2(e){
         e.preventDefault();
-        console.log(e.target);
         
         firebase.auth().onAuthStateChanged(
             (user) => {
@@ -49,16 +47,15 @@ function SetProfile() {
                 storageReference.put(e.target.files[0], metadata).then(() => {
                     storageReference.getDownloadURL().then((url) => {
                         var users = firebase.database().ref('com_list/users/' + user.uid);
+
                         users.once('value', (snapshot) => {
                             var tempData = snapshot.val();
                             tempData.imgURL = url;
                             if(tempData != null){
                                 users.set(tempData);
                             }
-                        }).then(() => {
-                            alert("Set profile picture successfully");
                             navigate('/chatroom');
-                        });
+                        })
                     })
                 })
                 
@@ -71,7 +68,7 @@ function SetProfile() {
     const [username, setUsername] = React.useState("");
 
     return <>
-    <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
+    <form autoComplete='off' className='form' id="profile_form" onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
             <h1 style={{textAlign: "center"}}>
             Set your profile
@@ -89,7 +86,7 @@ function SetProfile() {
             <div className='bg-inner'></div>
             </div>
         </div>
-        <button className='btn block-cube block-cube-hover' type='submit' >
+        <button className='btn block-cube block-cube-hover' id="profile_button" type='submit' >
             <div className='bg-top'>
             <div className='bg-inner'></div>
             </div>
@@ -104,7 +101,7 @@ function SetProfile() {
             </div>
         </button>
     </form>
-    <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm2(e)}>
+    <form autoComplete='off' className='form profile_picture' onSubmit={(e) => SubmitForm2(e)}>
         <div className='control block-cube block-input'>
             <input name='username' placeholder='file' type='file' onChange={(e) => {SubmitForm2(e)}}/>
             <div className='bg-top'>
