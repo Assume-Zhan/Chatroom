@@ -37,6 +37,7 @@ function Signup() {
                             id: 0,
                             name: username,
                             imgURL: imgURL,
+                            userid: user.uid,
                         });
                     }
                     else{
@@ -45,6 +46,7 @@ function Signup() {
                             id: snapshot.val(),
                             name: username,
                             imgURL: imgURL,
+                            userid: user.uid,
                         });
                     }
                     

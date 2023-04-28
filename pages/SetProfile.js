@@ -101,7 +101,7 @@ function SetProfile() {
             </div>
         </button>
     </form>
-    <form autoComplete='off' className='form profile_picture' onSubmit={(e) => SubmitForm2(e)}>
+    <form autoComplete='off' className='form profile_picture'>
         <div className='control block-cube block-input'>
             <input name='username' placeholder='file' type='file' onChange={(e) => {SubmitForm2(e)}}/>
             <div className='bg-top'>
