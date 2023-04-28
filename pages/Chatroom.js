@@ -147,8 +147,6 @@ function Chatroom() {
                     com_list.set(current_user_list);
                 });
             }
-
-
         }
     }
 
@@ -177,7 +175,7 @@ function Chatroom() {
         <Grid.Row style={{height: '10%', maxHeight: "10vh", overflow: "hidden"}}>
             <Menu inverted style={{width: '100%'}}>
                 <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
-                <Menu.Item as={Link} to="/setprofile">{username}</Menu.Item>
+                <Menu.Item as={Link} to="/setprofile">Set profile</Menu.Item>
                 <Menu.Menu position='right'>
                     {
                         user === null ? (
@@ -194,10 +192,12 @@ function Chatroom() {
             {/* Messager */}
             <Grid.Row style={{height: "5%"}}></Grid.Row>
             <Messager textAlign='center'
+                username={username}
                 group={group}
                 addGroup={addGroup}
                 addPerson={addPerson}
                 handleGroupClick={handleGroupClick}
+                imgURL={imgURL}
             />
         </Grid.Column>
         <Grid.Column width={13} style={{

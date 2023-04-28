@@ -1,6 +1,6 @@
 import 'semantic-ui-css/semantic.min.css';
 import React from 'react';
-import { Button, Icon, Input } from 'semantic-ui-react'
+import { Button, Icon, Popup, Grid, Image, List } from 'semantic-ui-react'
 
 function Group(props){
     return <div style={{backgroundColor: "red", margin: 5}}>
@@ -28,22 +28,33 @@ function Messager(props){
     }, [props.group])
 
     return <>
-        <Button animated='vertical' style={{width: "55%", margin: 5}}
-            onClick={() => {props.addGroup()}}
-        >
-            <Button.Content hidden>Add new room</Button.Content>
-            <Button.Content visible>
-                <Icon name='shop' />
-            </Button.Content>
-        </Button>
-        <Button animated='vertical' style={{width: "55%", margin: 5}}
-            onClick={() => {props.addPerson()}}
-        >
-            <Button.Content hidden>Add new member</Button.Content>
-            <Button.Content visible>
-                <Icon name='shop' />
-            </Button.Content>
-        </Button>
+        <Grid verticalAlign="center">
+            <Grid.Column width={4} style={{textAlign: "center",}} >
+                <Image avatar src={props.imgURL} size='big' verticalAlign='middle' />
+            </Grid.Column>
+            <Grid.Column width={8} style={{textAlign: "center",}} verticalAlign="middle">
+                <List divided>
+                    <List.Item style={{textAlign: "center", justifyContent: "center",}}>
+                        <List.Content center verticalAlign="middle" >
+                            <List.Description style={{color: "#fff"}}>{props.username}</List.Description>
+                        </List.Content>
+                    </List.Item>
+                </List>
+            </Grid.Column>
+            <Grid.Column verticalAlign="middle" center width={4} style={{textAlign: "left", paddingRight: "0", justifyContent: "left", }}>
+                <Popup trigger={<Button icon="add" />} on='click'>
+                    <Grid divided columns='equal'>
+                    <Grid.Column>
+                        <Button color='white' content='Add new room' onClick={() => {props.addGroup()}} fluid />
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Button color='red' content='Add new person' onClick={() => {props.addPerson()}} fluid />
+                    </Grid.Column>
+                    </Grid>
+                </Popup>
+            </Grid.Column>
+        </Grid>
+        <br/>
         {
             group && group.map((group_) => {
                     return <Group

@@ -24,3 +24,12 @@
 .k-author{
     color: #FFFFFF;
 }
+
+.k-input .k-input, .k-input .k-picker, .k-picker .k-input, .k-picker .k-picker {
+    border-width: 0 !important;
+    color: rgb(255, 255, 255) !important;
+    background: none;
+    font: inherit;
+    outline: 0;
+    box-shadow: none;
+}

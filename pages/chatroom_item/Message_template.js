@@ -4,7 +4,7 @@ import '../../css/message.css'
 import { Chat } from "@progress/kendo-react-conversational-ui";
 import "@progress/kendo-theme-default/dist/all.css";
 
-const initialMessages = (messages, name) => {
+const initialMessages = (messages) => {
     var m = []
     messages != null ? messages.map((message) => {
 
@@ -34,7 +34,7 @@ function Messages_template(props){
             dark
             maxWidth={"none"}
             user={props.user}
-            messages={initialMessages(props.messages, props.username)}
+            messages={initialMessages(props.messages)}
             onMessageSend={addNewMessage}
             placeholder={"Type a message..."}
             className='chatClass'
