@@ -26,3 +26,25 @@ firebase deploy
 ```
 
 - Site : [https://software-studio-chatroom-59f2f.web.app](https://software-studio-chatroom-59f2f.web.app)
+
+### Database rules
+```json
+{
+  "rules": {
+    "com_list": {
+      "userlength": {
+        ".write": true,
+        ".read": true
+      },
+      "users": {
+        ".write": false,
+        ".read": false,
+        "$userid": {
+          ".read": "$userid === auth.uid",
+          ".write": "$userid === auth.uid"
+        }
+      }
+    }
+  }
+}
+```
