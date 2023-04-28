@@ -47,13 +47,16 @@ function SetProfile() {
                 storageReference.put(e.target.files[0], metadata).then(() => {
                     storageReference.getDownloadURL().then((url) => {
                         var users = firebase.database().ref('com_list/users/' + user.uid);
+                        var tempData;
 
                         users.once('value', (snapshot) => {
-                            var tempData = snapshot.val();
+                            tempData = snapshot.val();
                             tempData.imgURL = url;
+                        }).then(() => {
                             if(tempData != null){
                                 users.set(tempData);
                             }
+                            console.log(tempData);
                             navigate('/chatroom');
                         })
                     })
