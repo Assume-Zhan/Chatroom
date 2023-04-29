@@ -1,6 +1,29 @@
 # Chatroom 
 
-## Add index.html 
+## Basic usage
+
+### Signin
+- Signup with email
+- Signin with email or google
+![](./assets/homepage.png)
+
+### Chatroom
+
+![](./assets/chatroom.png)
+
+- Add person or room
+
+![](./assets/add.png)
+
+- Click to choose rooms
+
+![](./assets/rooms.png)
+
+---
+
+## Setup
+
+### Add index.html 
 - Add index.html with following in public directory
 ```html
 <!DOCTYPE html>
@@ -32,6 +55,10 @@ firebase deploy
 {
   "rules": {
     "com_list": {
+      "rooms": {
+        ".write": "auth.uid != null",
+        ".read": "auth.uid != null"
+      },
       "userlength": {
         ".write": true,
         ".read": true
