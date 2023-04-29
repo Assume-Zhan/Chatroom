@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import firebase from "../utils/config";
 import "firebase/compat/auth";
 import 'firebase/compat/database'
+import Animation from "../utils/Animation"
 
 function Homepage() {
 
@@ -83,7 +84,11 @@ function Homepage() {
     }
 
     return <Grid style={{height: '100vh', textAlign: "center"}}>
-        <Grid.Row style={{height: '10%'}}></Grid.Row>
+        <Grid.Row style={{height: '10%', textAlign: "center"}}>
+            <Grid.Column width={4}></Grid.Column>
+            <Grid.Column width={8}><Animation/></Grid.Column>
+            <Grid.Column width={4}></Grid.Column>
+        </Grid.Row>
         <Grid.Row style={{height: '10%', alignItems: "center", justifyContent: "center"}}>
             <Grid.Column style={{width: "20%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
