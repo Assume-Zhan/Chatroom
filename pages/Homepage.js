@@ -72,7 +72,8 @@ function Homepage() {
                     }
 
                     /* Navigate to chatroom */
-                    navigate('/chatroom')
+                    navigate('/chatroom');
+                    location.reload();
                 })
             }
         )

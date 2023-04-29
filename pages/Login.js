@@ -15,8 +15,9 @@ function Login() {
         firebase.auth().signInWithEmailAndPassword(mail, password).then(
             (_) => {
                 /* Successfully login, redirect to chatroom */
-                navigate('/chatroom');
                 alert("success", "Login success!");
+                navigate('/chatroom');
+                location.reload();
             }).catch((error) => {
                 alert(error.message);
                 setMail("");

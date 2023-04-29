@@ -61,7 +61,8 @@ function Signup() {
                     alert("success", "Sign up success!");
 
                     /* Navigate to chatroom */
-                    navigate('/chatroom')
+                    navigate('/chatroom');
+                    location.reload();
                 })
                 
             }).catch((error) => {
