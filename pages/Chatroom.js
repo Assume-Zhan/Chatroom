@@ -195,17 +195,6 @@ function Chatroom() {
             })
 
             firstLoad = false;
-
-            // com_list.orderByChild('timestamp').startAt(Date.now()).on('child_added', (snapshot) => {
-            //     console.log(snapshot.val())
-            //     if(snapshot.val().data != null){
-            //         // notifyMe("New message")
-            //         messages[name].push(snapshot.val());
-            //         setMessages(messages);
-            //         forceUpdate();
-            //     }
-
-            // })
         }
         else{
         }
