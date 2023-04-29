@@ -35,35 +35,40 @@ function Homepage() {
                  * Push user profile
                  */
                 var users = firebase.database().ref('com_list/users/' + user.uid);
-                var userLength = firebase.database().ref('com_list/userlength');
-                userLength.once('value', (snapshot) => {
 
-                    /*
-                     * Set and get default image
-                     */
+                users.get().then((snapshott) => {
+                    if(snapshott.val() == null) {
 
-                    if(snapshot.val() == null) {
-                        userLength.set(0);
-                        users.set({
-                            email: user.email,
-                            id: 0,
-                            name: user.email,
-                            imgURL: user.photoURL,
-                            userid: user.uid,
-                        });
+                        var userLength = firebase.database().ref('com_list/userlength');
+                        userLength.once('value', (snapshot) => {
+
+                            /*
+                            * Set and get default image
+                            */
+                            if(snapshot.val() == null) {
+                                userLength.set(0);
+                                users.set({
+                                    email: user.email,
+                                    id: 0,
+                                    name: user.email,
+                                    imgURL: user.photoURL,
+                                    userid: user.uid,
+                                });
+                            }
+                            else{
+                                users.set({
+                                    email: user.email,
+                                    id: snapshot.val(),
+                                    name: user.email,
+                                    imgURL: user.photoURL,
+                                    userid: user.uid,
+                                });
+                            }
+                            
+                            /* Update user length  */
+                            userLength.set(snapshot.val() + 1);
+                        })
                     }
-                    else{
-                        users.set({
-                            email: user.email,
-                            id: snapshot.val(),
-                            name: user.email,
-                            imgURL: user.photoURL,
-                            userid: user.uid,
-                        });
-                    }
-                    
-                    /* Update user length  */
-                    userLength.set(snapshot.val() + 1);
 
                     /* Navigate to chatroom */
                     navigate('/chatroom')

@@ -24,27 +24,27 @@ function Messager(props){
     }, [props.group])
 
     return <>
-        <Grid verticalAlign="center">
+        <Grid verticalAlign="middle">
             <Grid.Column width={4} style={{textAlign: "center",}} >
                 <Image avatar src={props.imgURL} size='big' verticalAlign='middle' />
             </Grid.Column>
             <Grid.Column width={7} style={{textAlign: "center",}} verticalAlign="middle">
                 <List divided>
                     <List.Item style={{textAlign: "center", justifyContent: "center",}}>
-                        <List.Content center verticalAlign="middle" >
-                            <List.Description style={{color: "#fff"}}>{props.username}</List.Description>
+                        <List.Content verticalAlign="middle" >
+                            <List.Description style={{color: "#fff", overflow: "hidden"}}>{props.username}</List.Description>
                         </List.Content>
                     </List.Item>
                 </List>
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" center width={5} style={{textAlign: "left", paddingRight: "0", justifyContent: "left", }}>
+            <Grid.Column verticalAlign="middle" width={5} style={{textAlign: "left", paddingRight: "0", justifyContent: "left", }}>
                 <Popup trigger={<Button icon="add" />} on='click'>
                     <Grid divided columns='equal'>
                     <Grid.Column>
-                        <Button color='white' content='Add new room' onClick={() => {props.addGroup()}} fluid />
+                        <Button content='Add new room' onClick={() => {props.addGroup()}} fluid />
                     </Grid.Column>
                     <Grid.Column>
-                        <Button color='red' content='Add new person' onClick={() => {props.addPerson()}} fluid />
+                        <Button content='Add new person' onClick={() => {props.addPerson()}} fluid />
                     </Grid.Column>
                     </Grid>
                 </Popup>
@@ -53,7 +53,7 @@ function Messager(props){
         <br/>
         <Grid columns={1}>
             <Grid.Column width={16}>
-                <List divided selection inverted animated="true" id="Lissss">
+                <List divided selection inverted animated id="Lissss">
                 {
                     group && group.map((group_) => {
                             return <Group
