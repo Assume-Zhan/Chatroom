@@ -187,7 +187,7 @@ function Chatroom() {
                 if(snapshot.val().data != null){
                     if(firstLoad == false && snapshot.val().email != user.email) {
                         console.log(snapshot.val().email, user.email)
-                        notifyMe("New message :", snapshot.val().data)
+                        notifyMe("New message!")
                     }
                     messages[name].push(snapshot.val());
                     setMessages(messages);

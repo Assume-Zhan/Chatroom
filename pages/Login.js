@@ -38,7 +38,7 @@ function Login() {
             </h1>
         </div>
         <div className='control block-cube block-input'>
-            <input name='username' placeholder='Username' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
+            <input name='username' placeholder='Email' type='text' value={mail} onChange={(e) => {setMail(e.target.value)}}/>
             <div className='bg-top'>
             <div className='bg-inner'></div>
             </div>
