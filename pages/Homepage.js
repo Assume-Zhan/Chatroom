@@ -84,12 +84,12 @@ function Homepage() {
     }
 
     return <Grid style={{height: '100vh', textAlign: "center"}}>
-        <Grid.Row style={{height: '10%', textAlign: "center"}}>
+        <Grid.Row style={{textAlign: "center"}}>
             <Grid.Column width={4}></Grid.Column>
             <Grid.Column width={8}><Animation/></Grid.Column>
             <Grid.Column width={4}></Grid.Column>
         </Grid.Row>
-        <Grid.Row style={{height: '10%', alignItems: "center", justifyContent: "center"}}>
+        <Grid.Row style={{alignItems: "center", justifyContent: "center"}}>
             <Grid.Column style={{width: "20%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <form autoComplete='off' className='form' onSubmit={(e) => pressSignup(e)}>
                 <button className='btn block-cube block-cube-hover'>
@@ -142,8 +142,8 @@ function Homepage() {
             </Grid.Column>
         </Grid.Row>
         {
-            activeItem === "signup" ? <Grid.Row textAlign="center" style={{height: '40%'}}><Signup style={{}}></Signup></Grid.Row> :
-                <Grid.Row textAlign="center" style={{height: '40%'}}><Login></Login></Grid.Row>
+            activeItem === "signup" ? <Grid.Row textAlign="center" style={{}}><Signup style={{}}></Signup></Grid.Row> :
+                <Grid.Row textAlign="center" style={{}}><Login></Login></Grid.Row>
         }
         <Grid.Row style={{height: '30%'}}></Grid.Row>
     </Grid>
