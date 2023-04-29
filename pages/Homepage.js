@@ -53,6 +53,22 @@ function Homepage() {
                     </div>
                 </button>
             </form>
+            <form autoComplete='off' className='form' onSubmit={(e) => pressLogin(e)}>
+                <button className='form btn block-cube block-cube-hover'>
+                    <div className='bg-top'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg-right'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='bg'>
+                    <div className='bg-inner'></div>
+                    </div>
+                    <div className='text'>
+                    Google
+                    </div>
+                </button>
+            </form>
             </Grid.Column>
         </Grid.Row>
         {

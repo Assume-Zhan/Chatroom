@@ -10,6 +10,9 @@ function Signup() {
 
     function SubmitForm(e){
 
+        if(e.target.id === "no") return
+        console.log(e.target)
+
         /* Prevent refresh the page when submit the form */
         e.preventDefault();
 
@@ -118,7 +121,7 @@ function Signup() {
             <div className='bg-inner'></div>
             </div>
         </div>
-        <button className='btn block-cube block-cube-hover' type='submit' >
+        <button className='btn block-cube block-cube-hover' type='submit' id="yes">
             <div className='bg-top'>
             <div className='bg-inner'></div>
             </div>
