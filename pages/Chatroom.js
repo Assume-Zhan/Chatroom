@@ -8,6 +8,22 @@ import firebase from '../utils/config';
 import Messager from './chatroom_item/Messager';
 import Messages_template from './chatroom_item/Message_template';
 
+
+function notifyMe(message) {
+
+    if (Notification.permission === "granted") {
+        var notification = new Notification(message);
+    }
+
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                var notification = new Notification(message);
+            }
+        });
+    }
+}
+
 function Chatroom() {
 
     const navigate = useNavigate();
@@ -160,6 +176,8 @@ function Chatroom() {
         setCurrentGroup(name);
         var com_list = firebase.database().ref('com_list/rooms/' + name);
 
+        var firstLoad = true;
+
         let m = messages;
         if(m[name] == null){
             m[name] = [];
@@ -167,11 +185,27 @@ function Chatroom() {
             forceUpdate();
             com_list.on('child_added', (snapshot) => {
                 if(snapshot.val().data != null){
+                    if(firstLoad == false && snapshot.val().email != user.email) {
+                        notifyMe("New message :", snapshot.val().data)
+                    }
                     messages[name].push(snapshot.val());
                     setMessages(messages);
                     forceUpdate();
                 }
             })
+
+            firstLoad = false;
+
+            // com_list.orderByChild('timestamp').startAt(Date.now()).on('child_added', (snapshot) => {
+            //     console.log(snapshot.val())
+            //     if(snapshot.val().data != null){
+            //         // notifyMe("New message")
+            //         messages[name].push(snapshot.val());
+            //         setMessages(messages);
+            //         forceUpdate();
+            //     }
+
+            // })
         }
         else{
         }
