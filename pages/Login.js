@@ -30,7 +30,7 @@ function Login() {
     const [password, setPassword] = React.useState("");
 
     return <>
-    <form autoComplete='off' className='form' onSubmit={(e) => SubmitForm(e)}>
+    <form autoComplete='on' className='form' onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
             <h1 style={{textAlign: "center"}}>
             Login

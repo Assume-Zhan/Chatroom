@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Homepage from "./pages/Homepage";
 import Chatroom from "./pages/Chatroom";
 import SetProfile from "./pages/SetProfile";
+import CheckProfile from "./pages/CheckProfile";
 import "./index.css"
 
 var StyledHomepage = styled(Homepage)`
@@ -21,6 +22,7 @@ function App(){
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/chatroom" element={<Chatroom></Chatroom>}></Route>
             <Route path="/setprofile" element={<SetProfile></SetProfile>}></Route>
+            <Route path="/checkprofile" element={<CheckProfile></CheckProfile>}></Route>
         </Routes>
     </BrowserRouter>
 }

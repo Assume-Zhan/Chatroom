@@ -186,6 +186,7 @@ function Chatroom() {
             com_list.on('child_added', (snapshot) => {
                 if(snapshot.val().data != null){
                     if(firstLoad == false && snapshot.val().email != user.email) {
+                        console.log(snapshot.val().email, user.email)
                         notifyMe("New message :", snapshot.val().data)
                     }
                     messages[name].push(snapshot.val());
@@ -204,7 +205,7 @@ function Chatroom() {
         <Grid.Row style={{height: '10%', maxHeight: "10vh", overflow: "hidden"}}>
             <Menu inverted style={{width: '100%'}}>
                 <Menu.Item as={Link} to="/chatroom">Chatroom</Menu.Item>
-                <Menu.Item as={Link} to="/setprofile">Set profile</Menu.Item>
+                <Menu.Item as={Link} to="/checkprofile">Profile</Menu.Item>
                 <Menu.Menu position='right'>
                     {
                         user === null ? (

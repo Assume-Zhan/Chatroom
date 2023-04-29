@@ -25,6 +25,7 @@ function SetProfile() {
                     if(tempData != null){
                         users.set(tempData);
                     }
+                    alert("Set ");
                     navigate('/chatroom');
                 })
             }
@@ -117,6 +118,22 @@ function SetProfile() {
             <div className='bg-inner'></div>
             </div>
         </div>
+    </form>
+    <form autoComplete='off' className='form' id="profile_form" onSubmit={(e) => navigate("/checkprofile")}>
+        <button className='btn block-cube block-cube-hover' id="profile_button" type='submit' >
+            <div className='bg-top'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+            <div className='bg-inner'></div>
+            </div>
+            <div className='text'>
+            Back
+            </div>
+        </button>
     </form>
     </>
 
