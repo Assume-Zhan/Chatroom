@@ -25,8 +25,7 @@ function SetProfile() {
                     if(tempData != null){
                         users.set(tempData);
                     }
-                    alert("Set ");
-                    navigate('/chatroom');
+                    alert("Set Name successfully");  
                 })
             }
         )
@@ -57,8 +56,7 @@ function SetProfile() {
                             if(tempData != null){
                                 users.set(tempData);
                             }
-                            console.log(tempData);
-                            navigate('/chatroom');
+                            alert("Set picture successfully");  
                         })
                     })
                 })
@@ -75,7 +73,7 @@ function SetProfile() {
     <form autoComplete='off' className='form' id="profile_form" onSubmit={(e) => SubmitForm(e)}>
         <div className='control'>
             <h1 style={{textAlign: "center"}}>
-            Set your profile
+            Set your username
             </h1>
         </div>
         <div className='control block-cube block-input'>
@@ -106,6 +104,11 @@ function SetProfile() {
         </button>
     </form>
     <form autoComplete='off' className='form profile_picture'>
+        <div className='control'>
+            <h1 style={{textAlign: "center"}}>
+            Set your picture
+            </h1>
+        </div>
         <div className='control block-cube block-input'>
             <input name='username' placeholder='file' type='file' onChange={(e) => {SubmitForm2(e)}}/>
             <div className='bg-top'>
