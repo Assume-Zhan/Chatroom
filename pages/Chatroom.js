@@ -54,15 +54,20 @@ function Chatroom() {
         var com_list = firebase.database().ref('com_list/rooms/' + currentGroup);
         const date = new Date();
 
-        var post_data = {
-            username: username,
-            data: message,
-            email: user != null ? user.email : "non-user",
-            timeStamp: date.getTime(),
-            imgURL: imgURL
-        };
+        if(currentGroup != ""){
+            var post_data = {
+                username: username,
+                data: message,
+                email: user != null ? user.email : "non-user",
+                timeStamp: date.getTime(),
+                imgURL: imgURL
+            };
 
-        com_list.push(post_data).key;
+            com_list.push(post_data).key;
+        }
+        else{
+            alert("Please select a group");
+        }
     }
 
     const callback = snapshot => {
@@ -127,6 +132,7 @@ function Chatroom() {
     function addGroup(){
         let group = prompt("Please enter your name", "New room");
         if(group != null){
+            console.log("Add : room")
             firebase.database().ref('com_list/rooms/' + group).set({name: group, users: [user.email]});
         }
     }
@@ -188,9 +194,9 @@ function Chatroom() {
                 </Menu.Menu>
             </Menu>
         </Grid.Row>
-        <Grid.Column width={3} style={{display: "block", maxHeight: "85vh", width: "20%", textAlign: "center", overflow: "scroll"}}>
+        <Grid.Column width={3} style={{display: "block", maxHeight: "85vh", width: "20%", textAlign: "center", overflow: "scroll", paddingRight: "0"}}>
             {/* Messager */}
-            <Grid.Row style={{height: "5%"}}></Grid.Row>
+            <Grid.Row style={{height: "5%", }}></Grid.Row>
             <Messager textAlign='center'
                 username={username}
                 group={group}
@@ -198,6 +204,7 @@ function Chatroom() {
                 addPerson={addPerson}
                 handleGroupClick={handleGroupClick}
                 imgURL={imgURL}
+                currentGroup={currentGroup}
             />
         </Grid.Column>
         <Grid.Column width={13} style={{

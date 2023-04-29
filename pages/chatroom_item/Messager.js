@@ -3,18 +3,14 @@ import React from 'react';
 import { Button, Icon, Popup, Grid, Image, List } from 'semantic-ui-react'
 
 function Group(props){
-    return <div style={{backgroundColor: "red", margin: 5}}>
-        <Button 
-            animated='vertical' 
-            style={{width: "55%", }}
+    return <List.Item 
+            active={props.active} 
             onClick={() => {props.handleGroupClick(props.name)}}
+            style={{paddingRight: "0"}}
         >
-            <Button.Content hidden>{props.name}</Button.Content>
-            <Button.Content visible>
-                <Icon name='shop' />
-            </Button.Content>
-        </Button>
-    </div>
+            <List.Content verticalAlign="middle">{props.name}</List.Content>
+            <List.Icon verticalAlign="middle" name='group' size='large' style={{overflow: "hidden"}}/>
+        </List.Item>
 }
 
 function Messager(props){
@@ -24,7 +20,7 @@ function Messager(props){
 
     React.useEffect(() => {
         console.log("Use effect");
-        setGroup(props.group)
+        setGroup(props.group);
     }, [props.group])
 
     return <>
@@ -32,7 +28,7 @@ function Messager(props){
             <Grid.Column width={4} style={{textAlign: "center",}} >
                 <Image avatar src={props.imgURL} size='big' verticalAlign='middle' />
             </Grid.Column>
-            <Grid.Column width={8} style={{textAlign: "center",}} verticalAlign="middle">
+            <Grid.Column width={7} style={{textAlign: "center",}} verticalAlign="middle">
                 <List divided>
                     <List.Item style={{textAlign: "center", justifyContent: "center",}}>
                         <List.Content center verticalAlign="middle" >
@@ -41,7 +37,7 @@ function Messager(props){
                     </List.Item>
                 </List>
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" center width={4} style={{textAlign: "left", paddingRight: "0", justifyContent: "left", }}>
+            <Grid.Column verticalAlign="middle" center width={5} style={{textAlign: "left", paddingRight: "0", justifyContent: "left", }}>
                 <Popup trigger={<Button icon="add" />} on='click'>
                     <Grid divided columns='equal'>
                     <Grid.Column>
@@ -55,18 +51,25 @@ function Messager(props){
             </Grid.Column>
         </Grid>
         <br/>
-        {
-            group && group.map((group_) => {
-                    return <Group
-                        key={idx++}
-                        name={group_.name}
-                        handleGroupClick={props.handleGroupClick}
-                    />
-            })
-            // messages && messages.map((message) => {
-            //     return <Message_ key={idx++} message={message.data}/>
-            // })
-        }
+        <Grid columns={1}>
+            <Grid.Column width={16}>
+                <List divided selection inverted animated="true" id="Lissss">
+                {
+                    group && group.map((group_) => {
+                            return <Group
+                                key={idx++}
+                                name={group_.name}
+                                handleGroupClick={props.handleGroupClick}
+                                active={props.currentGroup == group_.name}
+                            />
+                    })
+                    // messages && messages.map((message) => {
+                    //     return <Message_ key={idx++} message={message.data}/>
+                    // })
+                }
+                </List>
+            </Grid.Column>
+        </Grid>
     </>
     
 }
