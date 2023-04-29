@@ -147,9 +147,22 @@ function Chatroom() {
 
     function addGroup(){
         let group = prompt("Please enter your name", "New room");
+        var canAdd = true;
         if(group != null){
-            console.log("Add : room")
-            firebase.database().ref('com_list/rooms/' + group).set({name: group, users: [user.email]});
+            firebase.database().ref('com_list/rooms').once('value', (snapshot) => {
+                console.log()
+                if(snapshot.val() != null){
+                    Object.entries(snapshot.val()).map((child) => {
+                        if(child[1].name == group){
+                            canAdd = false;
+                        }
+                    })
+                }
+            }).then(() => {
+                if(canAdd) firebase.database().ref('com_list/rooms/' + group).set({name: group, users: [user.email]});
+                else alert("Group name already exists ( may be other user )");
+            })
+            
         }
     }
 
