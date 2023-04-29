@@ -38,7 +38,7 @@ function Homepage() {
                 var users = firebase.database().ref('com_list/users/' + user.uid);
 
                 users.get().then((snapshott) => {
-                    if(snapshott.val() == null) {
+                    if(!snapshott.exists()) {
 
                         var userLength = firebase.database().ref('com_list/userlength');
                         userLength.once('value', (snapshot) => {
@@ -73,7 +73,6 @@ function Homepage() {
 
                     /* Navigate to chatroom */
                     navigate('/chatroom');
-                    location.reload();
                 })
             }
         )
